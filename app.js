@@ -39,7 +39,8 @@ $(document).ready(function() {
   var board = new Board({
     width: 10,
     height: 10,
-    parent: $('#board-container')
+    parent: $('#board-container'),
+    squareSize: 40
   });
 
   var cursor = new Cursor({

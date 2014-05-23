@@ -13,6 +13,7 @@ function Square(options) {
   this.x = options.x;
   this.y = options.y;
   this.board = options.board;
+  this.size = options.size;
 }
 
 // beforeRender
@@ -27,5 +28,15 @@ Square.prototype.beforeRender = function() {};
 // after running the `beforeRender` hook
 Square.prototype.render = function(x, y, parent, object) {
   this.beforeRender();
-  $(this.el).appendTo(parent);
+  this.applyStyle();
+  this.el.appendTo(parent);
+}
+
+Square.prototype.applyStyle = function() {
+  this.el.css('width', this.size + 'px')
+         .css('height', this.size + 'px')
+         .css('margin-top', '1px')
+         .css('margin-left', '1px')
+         .css('float', 'left')
+         .css('position', 'relative');
 }

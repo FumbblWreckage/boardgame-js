@@ -78,9 +78,18 @@ Cursor.prototype.beforeRender = function() {};
 //
 Cursor.prototype.render = function() {
   this.beforeRender();
+  this.applyStyle();
   if (this.visible) {
     this.board.square(this.x, this.y).el.append(this.el);
   } else {
     this.el.remove();
   }
+}
+
+Cursor.prototype.applyStyle = function() {
+  this.el.css('width', this.square().size + 'px')
+         .css('height', this.square().size + 'px')
+         .css('position', 'absolute')
+         .css('top', '0px')
+         .css('left', '0px');
 }

@@ -6,13 +6,15 @@
 
 function Board(options) {
   var squares = [];
+  this.squareSize = options.squareSize
   for(var i=0; i < options.width; i++) {
     squares.push([]);
     for (var j=0; j < options.height; j++) {
       squares[i].push(new Square({
         x: i,
         y: j,
-        board: this
+        board: this,
+        size: options.squareSize
       }));
     }
   }
@@ -97,7 +99,14 @@ Board.prototype.eachSquare = function(fcn) {
 //  - Rendering each square row-wise
 //  - Rendering the board's cursor
 Board.prototype.render = function() {
+  var width = 1 + (this.xSize() * (this.squareSize + 1));
+  var height = 1 + (this.ySize() * (this.squareSize + 1));
+
   this.parent.children().detach();
+  this.parent.css('width', width + 'px')
+             .css('height', height + 'px')
+             .css('position', 'relative');
+
   for(var y = 0; y < this.ySize(); y++) {
     var row = $('<div>').css('clear', 'both').addClass('row').attr('id','row-' + y).appendTo(this.parent);
     for(var x = 0; x < this.xSize(); x++) {
